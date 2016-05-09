@@ -17,7 +17,7 @@ class CollectionController extends BaseController
     
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('show');
         parent::__construct();
     }
 
@@ -58,8 +58,8 @@ class CollectionController extends BaseController
     	}
     }
 
-    public function edit($id) {
-        $collection = Collection::find($id)->first();        
+    public function edit($id) {        
+        $collection = Collection::find($id);                
         return view('collections.edit')->with('collection',$collection);
     }
 

@@ -129,6 +129,13 @@
         });
     </script>
 
+    <!-- Manage Profile Pic Upload -->
+    <script type="text/javascript">
+		$('input[id=lefile]').change(function() {							
+			$('#photoCover').val($(this).val());
+			$('#button').text("Change");
+		});
+	</script>
 	<!-- Manage modal view/hide -->
 	<script type="text/javascript">
         @if(count($errors) > 0)         	

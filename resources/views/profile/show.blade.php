@@ -11,12 +11,14 @@
 				@if($allow_creation)
 					<li><a href="{{route('collection.create')}}"><span class="m_1 no-hover">Create Collection</span></a></li>			
 				@endif
-				@if(!Auth::user()->isThisMe($profile->id))
-					@if(!Auth::user()->isFollowing($profile->id))
-						<li><a href="{{route('user.follow',$profile->id)}}"><span class="m_1 no-hover">Follow</span></a></li>
-					@else
-						<li><a href="{{route('user.unfollow',$profile->id)}}"><span class="m_1 no-hover">UnFollow</span></a></li>                         
-                    @endif
+				@if(Auth::check())
+					@if(!Auth::user()->isThisMe($profile->id))
+						@if(!Auth::user()->isFollowing($profile->id))
+							<li><a href="{{route('user.follow',$profile->id)}}"><span class="m_1 no-hover">Follow</span></a></li>
+						@else
+							<li><a href="{{route('user.unfollow',$profile->id)}}"><span class="m_1 no-hover">UnFollow</span></a></li>                         
+	                    @endif
+					@endif
 				@endif
 			</ul>
 		</div>			

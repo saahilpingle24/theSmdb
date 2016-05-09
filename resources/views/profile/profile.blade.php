@@ -19,7 +19,7 @@
 	<span class="profile-name">
 		<img src="{{$profile->profile_picture}}">
 		<br><br>
-		<h2 style="color:white">{{$profile->name}}<a href="{{route('profile.create')}}"><small> (edit)</small></a></h2> 
+		<h2 style="color:white">{{$profile->name}}<a href="{{route('profile.edit',$profile->id)}}"><small> (edit)</small></a></h2> 
 	</span>
 </div>
 <div class="content">

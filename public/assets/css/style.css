@@ -1349,7 +1349,7 @@ p.cart {
 	margin: 0;
 	
 }
-.register-top-grid div, .register-bottom-grid div {
+.register-bottom-grid div {
 	width: 48%;
 	float: left;
 	margin: 10px 0;

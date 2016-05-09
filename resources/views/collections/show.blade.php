@@ -7,42 +7,48 @@
 			<div class="row">
 				<h3>
 					{{$collection->name}} 
-					@if(Auth::user()->id==$collection->user_id)
-					<small><a href="{{route('collection.edit',$collection->id)}}">(edit)</a></small>
+					@if(Auth::check())
+						@if(Auth::user()->id==$collection->user_id)
+						<small><a href="{{route('collection.edit',$collection->id)}}">(edit)</a></small>
+						@endif
 					@endif
-				</h3> 
-				@if(Auth::user()->id==$collection->user_id)				
-				<form method="POST" action="{{route('collection.destroy', $collection->id)}}">
-					{!!csrf_field()!!}
-					<input type="hidden" name="_method" value="DELETE">
-					<input type="hidden" name="collection_id" value="{{$collection->id}}">
-					<small>
-						<input type="submit" class="btn btn-warning btn-sm" title="This will delete your collection!" data-toggle="tooltip" data-placement="bottom" value="Delete collection?">
-					</small>
-				</form>
+				</h3>
+				@if(Auth::check()) 
+					@if(Auth::user()->id==$collection->user_id)				
+					<form method="POST" action="{{route('collection.destroy', $collection->id)}}">
+						{!!csrf_field()!!}
+						<input type="hidden" name="_method" value="DELETE">
+						<input type="hidden" name="collection_id" value="{{$collection->id}}">
+						<small>
+							<input type="submit" class="btn btn-warning btn-sm" title="This will delete your collection!" data-toggle="tooltip" data-placement="bottom" value="Delete collection?">
+						</small>
+					</form>
+					@endif
 				@endif
 				<p class="m_4">
 					{{$collection->description}}				
 				</p>
 			</div>
-			<div class="row">
-				<form method="post" action="{{route('store.comment')}}">
-					{!!csrf_field()!!}
-					<div class="text">
-						<textarea name="comment" id="expand" class="form-control" style="height:2.5em !important;" rows="1" placeholder="Leave a comment"></textarea>
-						<input type="hidden" name="collection_id" value="{{$collection->id}}">
-					</div>
-					@if ($errors->has('comment'))
-					<span class="help-block">
-						<strong>{{ $errors->first('comment') }}</strong>
-					</span>
-					@endif
-					<div class="form-submit1">
-						<input name="submit" class="btn btn-danger" type="submit" id="comment_submit" value="Post Comment" style="display:none"><br>
-					</div>
-					<div class="clearfix"></div>
-				</form>
-			</div>
+			@if(Auth::check())
+				<div class="row">
+					<form method="post" action="{{route('store.comment')}}">
+						{!!csrf_field()!!}
+						<div class="text">
+							<textarea name="comment" id="expand" class="form-control" style="height:2.5em !important;" rows="1" placeholder="Leave a comment"></textarea>
+							<input type="hidden" name="collection_id" value="{{$collection->id}}">
+						</div>
+						@if ($errors->has('comment'))
+						<span class="help-block">
+							<strong>{{ $errors->first('comment') }}</strong>
+						</span>
+						@endif
+						<div>
+							<input name="submit" class="btn btn-danger btn-sm" type="submit" id="comment_submit" value="Post Comment" style="display:none"><br>
+						</div>
+						<div class="clearfix"></div>
+					</form>
+				</div>
+			@endif
 			<br>			
 			<div class="row">
 				<div class="single">
