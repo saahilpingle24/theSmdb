@@ -12,10 +12,10 @@
 						<span class="logo">theSmdb</span>
 					</div> 
 					<br>
-					<p>The <em>'Social Movie Database'</em></p>
+					<p>The <em>'The Social Movie Database'</em></p>
 					<p class="text">
 						<small>
-							Developed towards fulfilling the requirements of the course - Guided Studies: Application of software engineering in web application development.
+							Graduate Course Project
 						</small>
 					</p>
 				</div>

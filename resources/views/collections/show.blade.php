@@ -77,7 +77,8 @@
 						<div style="display:none;" id="slide-content">
 							@foreach($collection->movies as $key=>$movie)
 							<div id="slide-content-{{$key}}">
-								<h5>{{$movie->title}}</h5>                        	
+								<a href="{{route('movie.show',$movie->tmdb_id)}}"><h4>{{$movie->title}}</h4></a>
+								<p><h5>Released: {{date_format(date_create($movie['release_date']),"F d, Y")}}</h5></p>
 							</div>
 							@endforeach                    
 						</div><!--/slide-content-->

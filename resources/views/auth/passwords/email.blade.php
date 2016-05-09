@@ -25,7 +25,7 @@
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-danger">
-					<i class="fa fa-btn fa-envelope"></i>Send Password Reset Link
+					Send Password Reset Link
 				</button>    
 			</div>
 		</form>

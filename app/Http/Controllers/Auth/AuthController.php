@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
-use Cloudder;
 use Event;
-use Illuminate\Support\Facades\Input;
+use App\User;
+use Cloudder;
+use Validator;
+use App\Jobs\SendWelcomeEmail;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -78,7 +79,8 @@ class AuthController extends Controller
                     $data['profile_picture'] = $results['url'];
                 }
             }
-            return User::create([
+            
+            $user = User::create([
                 'name' => $data['name'],
                 'email' => $data['email'],
                 'username' => $data['username'],
@@ -86,6 +88,10 @@ class AuthController extends Controller
                 'registered_on' => date('Y-m-d H:i:s'),
                 'password' => bcrypt($data['password']),
             ]);
+            
+            $this->dispatch(new SendWelcomeEmail($data['name'], $data['email']));
+
+            return $user;
         }        
         
     }

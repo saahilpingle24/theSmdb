@@ -48,16 +48,17 @@ class ExploreController extends BaseController
         $collections = \DB::table('collections')            
             ->join('users','collections.user_id','=', 'users.id')
             ->select('users.id as user_id','users.name as user_name','collections.id as collection_id','collections.name','collections.description')
-            ->get();        
+            ->get();               
         $currentPage = LengthAwarePaginator::resolveCurrentPage();      
         $path = LengthAwarePaginator::resolveCurrentPath();  
-        $collection = new Collection($collections);
-        $shuffled = $collection->shuffle();
-        $perPage = 8;
-        $currentPageSearchResults = $shuffled->slice($currentPage * $perPage, $perPage)->all();
+        $collection = new Collection($collections);        
+        $shuffled = $collection->shuffle();        
+        $perPage = 4;
+        $currentPageSearchResults = $shuffled->slice(($currentPage * $perPage)-1, $perPage)->all();        
         $paginatedSearchResults= new LengthAwarePaginator($currentPageSearchResults, count($shuffled), $perPage, Paginator::resolveCurrentPage(), [
             'path' => Paginator::resolveCurrentPath()
-        ]);            
+        ]);    
+            
         return view('explore.lists', ['collections' => $paginatedSearchResults]);        
     }
 }
