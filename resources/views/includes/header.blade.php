@@ -41,29 +41,6 @@
 				<li><p><a href="{{ url('/register') }}">&nbsp;Register</a></p></li>                 
 				<div class="clearfix"> </div>
 			@else				
-				<li id="notification_li"> 
-					<p>
-						<a href="#" id="notificationLink">
-							<i class="fa fa-globe feed" aria-hidden="true" title="Your notifications!" data-toggle="tooltip" data-placement="bottom"></i>
-						</a>
-					</p>
-					<div id="notificationContainer">
-							<div id="notificationTitle">Notifications</div>
-							<div id="notificationsBody" class="notifications">
-							<ul class="notifications">		
-								@if(sizeof($feed))
-									<ul class="notifications">
-										@foreach(json_decode($feed) as $feed)
-											<li>{{$feed}}</li>
-										@endforeach
-									</ul>
-								@else
-									<p class="text-center"> You've got no new notifications!</p>
-								@endif
-							</div>
-							<div id="notificationFooter"><a href="#">See All</a></div>
-						</div>
-				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 						<p>{{ Auth::user()->name }} <span class="caret"></span></p>

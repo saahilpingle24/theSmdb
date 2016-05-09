@@ -26,6 +26,7 @@ Route::post('/collection/movie', 'CollectionMovieController@store')->name('movie
 
 Route::get('/query/{query?}', 'SearchController@query');
 Route::post('/query/navigate', 'SearchController@show')->name('redirect.profile');
+
 Route::post('/movie/navigate', 'SearchController@movie')->name('redirect.movie');
 Route::get('/movie/surprise', 'MovieController@surprise')->name('redirect.surprise');
 
@@ -35,9 +36,11 @@ Route::get('/user/{id}/followers', 'ProfileController@getFollowers')->name('user
 Route::resource('profile', 'ProfileController');
 Route::resource('collection', 'CollectionController');
 Route::resource('movie', 'MovieController');
+
 Route::get('explore/movies', 'ExploreController@index')->name('explore.movies');
 Route::get('explore/collections', 'ExploreController@collections')->name('explore.collections');
 
+Route::put('profile/{id}/password', 'ProfileController@updatePassword')->name('password.update');
 
 
 

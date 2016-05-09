@@ -19,7 +19,7 @@ class MovieController extends BaseController
 {
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
+        $this->middleware('auth')->except('show','surprise');
         parent::__construct();
     }
 

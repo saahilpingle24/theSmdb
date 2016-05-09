@@ -242,3 +242,7 @@ $('#myCarousel').on('slid.bs.carousel', function (e) {
   var id = $('.item.active').data('slide-number');
   $('#carousel-text').html($('#slide-content-'+id).html());
 });
+
+$('#change-password').click(function() {  
+    $("#change-password-block").slideDown('slow'); 
+});

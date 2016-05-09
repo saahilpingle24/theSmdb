@@ -51,10 +51,17 @@ class ProfileController extends BaseController
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'password' => 'required|min:6|confirmed'
+            'name' => 'required|max:255',            
         ]);
     }
+
+    protected function passwordValidator(array $data)
+    {
+        return Validator::make($data, [
+            'password' => 'required|min:6|confirmed',       
+        ]);
+    }
+
 
     public function edit($id) 
     {
@@ -66,7 +73,7 @@ class ProfileController extends BaseController
     } 
 
     public function update(Request $request, $id) {        
-        $data = $request->only(['name','username','email','profile_picture','password','password_confirmation']);        
+        $data = $request->only(['name','username','email','profile_picture']);        
         $validator = $this->validator($data);
         if($validator->fails()) {               
             return Redirect::back()->withErrors($validator);            
@@ -82,8 +89,20 @@ class ProfileController extends BaseController
             }   
             User::where('id', $id)                
                 ->update(['name' => $data['name'],
-                    'profile_picture'=>$data['profile_picture'],
-                    'password'=>bcrypt($data['password'])
+                    'profile_picture'=>$data['profile_picture']                    
+                ]);        
+            return redirect()->route('profile.index');
+        }
+    }
+
+    public function updatePassword(Request $request, $id) {
+        $data = $request->only(['password','password_confirmation']);
+        $validator = $this->passwordValidator($data);
+        if($validator->fails()) {               
+            return Redirect::back()->withErrors($validator);          
+        } else {
+            User::where('id', $id)                
+                ->update(['password' => bcrypt($data['password'])
                 ]);        
             return redirect()->route('profile.index');
         }

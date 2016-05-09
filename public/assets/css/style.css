@@ -212,7 +212,7 @@ ul.header_right_box li.last{
 	list-style: none;
 	overflow: hidden;
 	width: 100%;  
-	height: 500px;
+	/*height: 500px;*/
 	padding: 0;
 	margin: 0;
 }
@@ -517,8 +517,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 	text-shadow: none;
 	margin: 0;
 	max-width: none;
-	position: absolute;
-	
+	position: absolute;	
 	right: 0;
 	width: 100%;
 	padding: 10px 15px 5px;
@@ -1350,8 +1349,8 @@ p.cart {
 	
 }
 .register-bottom-grid div {
-	width: 48%;
-	float: left;
+	/*width: 48%;*/
+	/*float: left;*/
 	margin: 10px 0;
 }
 .register-top-grid span, .register-bottom-grid span {
@@ -1465,7 +1464,7 @@ div.register-bottom-grid {
 		margin: 0 0 0 17%;
 	}
 	.banner_desc {
-		top: 88.5%;
+		/*top: 88.5%;*/
 	}
 	ul.list_4 {
 		padding: 0.5em;
