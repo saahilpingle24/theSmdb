@@ -123,6 +123,20 @@
 	<!-- Timeago JS -->
 	<script src="{{asset('assets/js/jquery.timeago.js')}}" type="text/javascript"></script>
     
+    <!-- Homepage Slider -->
+	<script src="{{asset('assets/js/responsiveslides.min.js')}}"></script>
+	<script>
+	    $(function () {
+	      $("#slider").responsiveSlides({
+	      	auto: true,
+	      	nav: true,
+	      	speed: 500,
+	        namespace: "callbacks",
+	        pager: true  
+	      });
+	    });
+	</script>
+
     <script type="text/javascript">
         jQuery(document).ready(function() {
             jQuery("time.timeago").timeago();

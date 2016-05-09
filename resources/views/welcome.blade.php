@@ -4,22 +4,23 @@
 <div class="slider">
 	<div class="callbacks_container">
 		<ul class="rslides" id="slider">
-			<a href="{{route('movie.show',$featured['id'])}}">
+			@foreach($featured as $movie)
 				<li>
-					<img src="{{$featured['backdrop_path']}}" class="img-responsive" alt=""/>
-				</li>	
-			</a>
+					<a href="{{route('movie.show',$movie['id'])}}">
+						<img src="{{$movie['backdrop_path']}}" class="img-responsive" alt=""/>
+					</a>					
+					<div class="banner_desc">													
+						<span class="slider-key">{{$movie['title']}}</span>
+						<span class="slider-key"> <i class="fa fa-angle-double-right" aria-hidden="true"></i> Published </span><span class="slider-value">{{date_format(date_create($movie['release_date']),"F d, Y")}}</span>
+						<span class="pull-right">
+							<span class="slider-key">Rating </span> <span class="slider-value">{{$movie['vote_average']}}/10</span>							
+						</span>
+					</div>
+				</li>				
+			@endforeach			
 		</ul>			
 	</div>
-	<div class="banner_desc">
-		<div class="col-md-9">
-			<ul class="list_1">
-				<li>{{$featured['title']}}</li>
-				<li>Published <span class="m_1">{{date_format(date_create($featured['release_date']),"F d, Y")}}</span></li>				
-				<li>Rating <span class="m_1">{{$featured['vote_average']}}</span></li>				
-			</ul>
-		</div>
-	</div>
+	
 </div>
 <div class="content">
 	<div class="box_1">

@@ -296,7 +296,8 @@ a.morebtn:hover{
 	
 }
 ul.callbacks_tabs.callbacks1_tabs {
-	position: absolute;
+	/*position: absolute;*/
+	display: none;
 	bottom:50%;
 	z-index: 999;
 	left:0px;
@@ -517,8 +518,7 @@ ul.callbacks_tabs.callbacks1_tabs {
 	margin: 0;
 	max-width: none;
 	position: absolute;
-	/*top:90.5%;*/
-	top:92%;
+	
 	right: 0;
 	width: 100%;
 	padding: 10px 15px 5px;
@@ -2038,4 +2038,14 @@ ul.twPc-Arrange {
 	background: transparent;
 	border: none;
 
+}
+
+.slider-key {
+	color: white;
+	font-size: 1.2em;
+}
+
+.slider-value {
+	color: white;
+	font-size: 0.9em;
 }

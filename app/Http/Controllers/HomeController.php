@@ -73,16 +73,15 @@ class HomeController extends BaseController
     {
         $numbers = range(0, 19);
         shuffle($numbers);        
-        $featured_movie = Tmdb::getMoviesApi()->getNowPlaying()['results'][$numbers[0]];
-        
-        while($featured_movie['backdrop_path'] == null) {
-            shuffle($numbers);        
-            $featured_movie = Tmdb::getMoviesApi()->getNowPlaying()['results'][$numbers[0]];    
-        }
-
-        $featured_movie['backdrop_path'] = $this->get_backdrop($featured_movie['backdrop_path']); 
-
-        return $featured_movie;
+        $featured_movie = Tmdb::getMoviesApi()->getNowPlaying()['results'];
+        $array = array();
+        foreach($featured_movie as $featured) {
+            if($featured['backdrop_path'] != null) {
+                $featured['backdrop_path'] = $this->get_backdrop($featured['backdrop_path']);
+                array_push($array,$featured);                
+            }    
+        }        
+        return $array;
     }    
 
     public function getFollowing($id) {
