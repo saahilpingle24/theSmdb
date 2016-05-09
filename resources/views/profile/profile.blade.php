@@ -16,11 +16,15 @@
 	</div>
 </div>
 <div class="profile-back">		
-	<span class="profile-name">
-		<img src="{{$profile->profile_picture}}">
-		<br><br>
-		<h2 style="color:white">{{$profile->name}}<a href="{{route('profile.edit',$profile->id)}}"><small> (edit)</small></a></h2> 
-	</span>
+	<div class="profile-name col-md-4">
+		<img src="{{$profile->profile_picture}}" style="height:200px;">
+	</div>
+	<div class="profile-name col-md-3">
+		<h2 style="color:white">{{$profile->name}}</h2>
+		<p><small style="color:white">{{$profile->username}} | {{$profile->email}}</small></p>		
+		<p><small style="color:white">Member since - {{date_format(date_create($profile['registered_on']),"F d, Y")}}</small></p>
+		<a href="{{route('profile.edit',$profile->id)}}"><small> (edit)</small></a>
+	</div>
 </div>
 <div class="content">
 		@if(count($collections)==0)

@@ -31,7 +31,7 @@
 			</div>
 			@if(Auth::check())
 				<div class="row">
-					<form method="post" action="{{route('store.comment')}}">
+					<form method="post" action="{{route('comment.store')}}">
 						{!!csrf_field()!!}
 						<div class="text">
 							<textarea name="comment" id="expand" class="form-control" style="height:2.5em !important;" rows="1" placeholder="Leave a comment"></textarea>
@@ -94,13 +94,23 @@
 						</div>
 						<div class="data">
 							<div>
-								<b><a href="{{route('profile.show',$comment->id)}}">{{$comment->name}} | {{$comment->username}}</a></b>
-								<span>
-								<small>
+								<b><a href="{{route('profile.show',$comment->user_id)}}">{{$comment->name}} | {{$comment->username}}</a></b>
+								<span class="pull-right" style="margin-right: 200px;">
+									<small>									
+										@if(Auth::check()) 										
+										<form method="post" action="{{route('comment.destroy', $comment->comment_id)}}">
+											{!!csrf_field()!!}
+											<input type="hidden" name="_method" value="delete">
+											<input type="hidden" name="comment_id" value="{{$comment->comment_id}}">
+											<button type="submit" class="delete-link fa fa-times" title="This will delete your comment!" data-toggle="tooltip" data-placement="bottom"></button>
+										</form>										
+									@endif															
+									</small>	
+								</span>							
+							</div>
+							<small>
 									(Created about <time class="timeago" datetime="{{$comment->created_at}}">{{$comment->created_at}}</time>)
 								</small>
-							</span>
-							</div>
 							<p>{{$comment->comment}}</p>
 						</div>
 						<div class="clearfix"></div>

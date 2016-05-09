@@ -75,7 +75,7 @@ class ProfileController extends BaseController
                 $data['profile_picture'] = Auth::user()->profile_picture;                
             } else {
                 if(Input::file('profile_picture')->isValid()) {                    
-                    Cloudder::upload($data['profile_picture'], $data['username'], array("width"=>"128", "height"=>"128", "crop"=>"scale"));                    
+                    Cloudder::upload($data['profile_picture'], $data['username'], array("width"=>"256", "height"=>"256", "crop"=>"scale"));                    
                     $results = Cloudder::getResult();                       
                     $data['profile_picture'] = $results['url'];
                 }   

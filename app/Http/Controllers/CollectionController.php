@@ -25,7 +25,7 @@ class CollectionController extends BaseController
     {
         $collection = Collection::where('collections.id',$id)->with('movies')->first(); 
         $comments = Comment::join('users','users.id','=','comments.user_id')->where('collection_id','=',$id)
-                    ->select('users.id','users.name','users.username', 'users.profile_picture', 'comments.comment', 'comments.created_at')->get();        
+                    ->select('users.id as user_id','comments.id as comment_id','users.name','users.username', 'users.profile_picture', 'comments.comment', 'comments.created_at')->get();        
         return view('collections.show')->with(['collection' => $collection, 'comments' => $comments]);
     }
 

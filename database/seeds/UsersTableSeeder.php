@@ -18,6 +18,7 @@ class UsersTableSeeder extends Seeder
         		'name' => $faker->word,
         		'username' => $faker->unique->word,
         		'email' => $faker->unique->email,
+                'registered_on' => date('Y-m-d H:i:s'),
         		'password' => bcrypt("password")
         	]);
         }

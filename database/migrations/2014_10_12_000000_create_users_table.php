@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('profile_picture')->nullable();
             $table->string('password', 60);
             $table->rememberToken();
+            $table->dateTime('registered_on');
             $table->dateTime('last_logout');
             $table->timestamps();
         });

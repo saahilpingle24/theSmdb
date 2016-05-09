@@ -73,7 +73,7 @@ class AuthController extends Controller
                 $data['profile_picture'] = 'http://res.cloudinary.com/dctgevlms/image/upload/c_scale,w_128/v1459637777/5894232_awtuue.png';
             } else {  
                 if(Input::file('profile_picture')->isValid()) {
-                    Cloudder::upload($data['profile_picture'], $data['username'], array("width"=>"128", "height"=>"128", "crop"=>"scale"));                    
+                    Cloudder::upload($data['profile_picture'], $data['username'], array("width"=>"256", "height"=>"256", "crop"=>"scale"));                    
                     $results = Cloudder::getResult();                       
                     $data['profile_picture'] = $results['url'];
                 }
@@ -83,6 +83,7 @@ class AuthController extends Controller
                 'email' => $data['email'],
                 'username' => $data['username'],
                 'profile_picture' => $data['profile_picture'],
+                'registered_on' => date('Y-m-d H:i:s'),
                 'password' => bcrypt($data['password']),
             ]);
         }        

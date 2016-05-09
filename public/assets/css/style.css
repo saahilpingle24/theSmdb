@@ -1714,9 +1714,8 @@ div.register-bottom-grid {
 }
 
 .profile-back {
-	background:black; 
-	opacity:0.4; 
-	height:250px;	
+	background:#003333; 	
+	height:300px;	
 	text-align: center;
 }
 
@@ -2033,4 +2032,10 @@ ul.twPc-Arrange {
     overflow: hidden;
     text-transform: uppercase;
     transition: color 0.15s ease-in-out 0s;
+}
+
+.delete-link {	
+	background: transparent;
+	border: none;
+
 }

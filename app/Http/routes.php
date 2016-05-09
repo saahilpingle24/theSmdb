@@ -11,22 +11,16 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-
-
-
+Route::auth();
 
 Route::get('/', 'HomeController@index');
-
-Route::auth();
 
 Route::get('/user/{id}/follow', 'ProfileController@follow')->name('user.follow');
 Route::get('/user/{id}/unfollow', 'ProfileController@unfollow')->name('user.unfollow');
 
-Route::post('/comment','CommentController@store')->name('store.comment');
+Route::post('/comment','CommentController@store')->name('comment.store');
+Route::delete('/comment/{id}','CommentController@destroy')->name('comment.destroy');
+
 Route::post('/collection/movie', 'CollectionMovieController@store')->name('movie.to.collection');
 
 
