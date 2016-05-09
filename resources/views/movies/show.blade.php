@@ -132,15 +132,18 @@
 						</div>						
 					@endif				
 				@endif
-				<em>We figured you might like some of these aswell!</em>
-				<br>			
-				@foreach ($suggestions as $suggestion)					
-					 <div class="update-nag">            			
-            			<div class="update-text">
-            			<a href="{{route('movie.show',$suggestion['id'])}}"><small>{{$suggestion['title']}}</small></a>
-            			</div>
-          			</div>					
-				@endforeach				
+				<br>
+				@if(count($suggestions)>0)
+					<em>We figured you might like some of these aswell!</em>
+					<br>			
+					@foreach ($suggestions as $suggestion)					
+						 <div class="update-nag">            			
+	            			<div class="update-text">
+	            			<a href="{{route('movie.show',$suggestion['id'])}}"><small>{{$suggestion['title']}}</small></a>
+	            			</div>
+	          			</div>					
+					@endforeach				
+				@endif
 			</div> 
 			<div class="clearfix"> </div>
 		</div>

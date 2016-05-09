@@ -14,6 +14,7 @@ use View;
 
 class HomeController extends BaseController
 {
+    use GetPoster;
 
     public function __construct()
     {
@@ -41,8 +42,10 @@ class HomeController extends BaseController
         if($fetch_new) {
             $movies =  Tmdb::getMoviesApi()->getPopular();
             foreach($movies['results'] as $movie) {
-                $movie['poster_path'] = $this->get_poster($movie['poster_path']);
-                Redis::set($movie['id'], json_encode($movie));
+                if($movie['poster_path']!=null) {
+                    $movie['poster_path'] = $this->get_poster($movie['poster_path']);
+                    Redis::set($movie['id'], json_encode($movie));    
+                }                
             }
             Redis::set('set_time', strtotime(date('Y-m-d H:i:s'))); 
         }           
@@ -66,34 +69,6 @@ class HomeController extends BaseController
         return view('welcome')->with(['movies'=>$movies,'featured'=>$featured_movie]);
     }
 
-    public function store_to_db($movies) {         
-        foreach($movies as $movie) {               
-            if (Movie::where('tmdb_id', '=', $movie['id'])->exists()) {
-                if(\DB::table('popular_movies')->where('tmdb_id', $movie['id'])->exists()) {
-
-                } else {
-                    $movie_id = Movie::where('tmdb_id', '=', $movie['id'])->lists('id')->first();
-                    \DB::table('popular_movies')->insert([                    
-                        'movie_id' => $movie_id,
-                        'tmdb_id' => $movie['id'],                    
-                    ]);    
-                }                
-            } else {
-                $poster_path = $this->get_poster($movie['poster_path']);                
-                Movie::create([
-                    'title' => $movie['title'],
-                    'original_title' => $movie['original_title'],
-                    'vote_average' => $movie['vote_average'],
-                    'popularity' => $movie['popularity'],
-                    'tmdb_id' => $movie['id'],
-                    'overview' => $movie['overview'],
-                    'poster_path' => $poster_path,
-                    'release_date' => $movie['release_date']
-                ]);                            
-            }
-        }                
-    }
-
     public function get_featured_movie()
     {
         $numbers = range(0, 19);
@@ -108,21 +83,7 @@ class HomeController extends BaseController
         $featured_movie['backdrop_path'] = $this->get_backdrop($featured_movie['backdrop_path']); 
 
         return $featured_movie;
-    }
-
-    public function get_poster($poster_path) 
-    {         
-        $url = "https://image.tmdb.org/t/p/w300/";        
-        $answer = $url.$poster_path;
-        return $answer;
-    }
-
-    public function get_backdrop($backdrop_path) 
-    {
-        $url = "https://image.tmdb.org/t/p/w780/";    
-        $answer = $url.$backdrop_path;
-        return $answer;
-    }
+    }    
 
     public function getFollowing($id) {
         $following = \DB::table('follow_user')

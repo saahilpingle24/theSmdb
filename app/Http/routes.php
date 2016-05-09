@@ -41,6 +41,8 @@ Route::get('/user/{id}/followers', 'ProfileController@getFollowers')->name('user
 Route::resource('profile', 'ProfileController');
 Route::resource('collection', 'CollectionController');
 Route::resource('movie', 'MovieController');
+Route::get('explore/movies', 'ExploreController@index')->name('explore.movies');
+Route::get('explore/collections', 'ExploreController@collections')->name('explore.collections');
 
 
 

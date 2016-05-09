@@ -34,10 +34,7 @@ class CollectionMovieController extends Controller
 	      		CollectionMovie::create([
 	                'collection_id' => $data['collection_id'],
 	                'movie_id' => $id
-	            ]);
-	   //    		\DB::table('collection_movie')->insert(
-	   //  			['collection_id' => $data['collection_id'], 'movie_id' => $id]
-				// );
+	            ]);	   
     			return "Movie added <i class='fa fa-thumbs-o-up' aria-hidden='true'></i>";
     		}    		
     	} catch(\Exception $e) {  
